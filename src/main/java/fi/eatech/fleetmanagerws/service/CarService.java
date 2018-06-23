@@ -1,12 +1,12 @@
 package fi.eatech.fleetmanagerws.service;
 
+import fi.eatech.fleetmanagerws.exceptions.BadRequestException;
 import fi.eatech.fleetmanagerws.exceptions.NotFoundException;
 import fi.eatech.fleetmanagerws.model.Car;
 import fi.eatech.fleetmanagerws.model.tools.CarFilter;
 import fi.eatech.fleetmanagerws.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,8 @@ public class CarService {
     }
 
     public Car addCar(Car car) {
+        if (carRepository.getOne(car.getRegistrationNumber()) != null)
+            throw new BadRequestException("Can't add new car when registrationNumber is already used.");
         return carRepository.save(car);
     }
 
