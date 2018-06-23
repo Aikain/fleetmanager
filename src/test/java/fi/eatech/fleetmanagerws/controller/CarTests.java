@@ -138,8 +138,6 @@ public class CarTests {
         Assert.assertNotNull(
                 "Tietokannasta pitäisi löytyä auto muokatun auton rekisterinumeron perusteella!",
                 updatedCar);
-        System.out.println(updatedCar);
-        System.out.println(newCarInfo);
         Assert.assertTrue(
                 "Päivitetyt tiedot eivät vastaa tietokannassa olevia!",
                 updatedCar.toString().equals(newCarInfo.toString()));
@@ -153,7 +151,6 @@ public class CarTests {
         mockMvc.perform(delete("/car/" + car.getRegistrationNumber())
                 .contentType(TestUtils.APPLICATION_JSON_UTF8)
         )
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(TestUtils.APPLICATION_JSON_UTF8));
 
