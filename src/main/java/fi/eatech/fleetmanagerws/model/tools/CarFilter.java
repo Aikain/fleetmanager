@@ -48,8 +48,8 @@ public class CarFilter {
     @Override
     public String toString() {
         String s = "";
-        s += makeString(s, "modelYearMin", modelYearMin + "");
-        s += makeString(s, "modelYearMax", modelYearMax + "");
+        s += makeString(s, "modelYearMin", modelYearMin != null ? modelYearMin + "" : "");
+        s += makeString(s, "modelYearMax", modelYearMax != null ? modelYearMax + "" : "");
         s += makeString(s, "model", model);
         s += makeString(s, "brand", brand);
         return s;
