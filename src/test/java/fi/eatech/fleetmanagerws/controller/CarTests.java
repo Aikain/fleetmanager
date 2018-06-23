@@ -16,14 +16,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
+@Transactional
 public class CarTests {
 
     private MockMvc mockMvc;
@@ -60,8 +62,7 @@ public class CarTests {
         carRepository.deleteAll();
         List<Car> cars = new ObjectMapper().readValue(
                 TypeReference.class.getResourceAsStream("/data.json"), new TypeReference<List<Car>>(){});
-        carRepository.save(cars);
-
+        carRepository.saveAll(cars);
     }
 
     @Test
@@ -114,7 +115,7 @@ public class CarTests {
                 cars.size() + 1, carRepository.count());
         Assert.assertNotNull(
                 "Tietokannasta pitäisi löytyä auto lisätyn auton rekisterinumeron perusteella!",
-                carRepository.findOne(car.getRegistrationNumber()));
+                carRepository.getOne(car.getRegistrationNumber()));
     }
 
     @Test
@@ -130,7 +131,7 @@ public class CarTests {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().contentType(TestUtils.APPLICATION_JSON_UTF8));
 
-        Car updatedCar = carRepository.findOne(car.getRegistrationNumber());
+        Car updatedCar = carRepository.getOne(car.getRegistrationNumber());
 
         Assert.assertEquals(
                 "Tietokannassa pitäisi olla saman verran autoja kuin ennen päivitystä!",
@@ -138,9 +139,9 @@ public class CarTests {
         Assert.assertNotNull(
                 "Tietokannasta pitäisi löytyä auto muokatun auton rekisterinumeron perusteella!",
                 updatedCar);
-        Assert.assertTrue(
+        Assert.assertEquals(
                 "Päivitetyt tiedot eivät vastaa tietokannassa olevia!",
-                updatedCar.toString().equals(newCarInfo.toString()));
+                updatedCar.toString(), newCarInfo.toString());
     }
 
     @Test
@@ -157,8 +158,8 @@ public class CarTests {
         Assert.assertEquals(
                 "Tietokannassa pitäisi olla yksi auto vähemmän kuin ennen poistamista!",
                 cars.size() - 1, carRepository.count());
-        Assert.assertNull(
+        Assert.assertFalse(
                 "Tietokannasta ei pitäisi löytyä autoa poistetun auton rekisterinumeron perusteella",
-                carRepository.findOne(car.getRegistrationNumber()));
+                carRepository.existsById(car.getRegistrationNumber()));
     }
 }

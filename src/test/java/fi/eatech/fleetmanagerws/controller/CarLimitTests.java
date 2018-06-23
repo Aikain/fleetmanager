@@ -60,7 +60,7 @@ public class CarLimitTests {
         carRepository.deleteAll();
         List<Car> cars = new ObjectMapper().readValue(
                 TypeReference.class.getResourceAsStream("/data.json"), new TypeReference<List<Car>>(){});
-        carRepository.save(cars);
+        carRepository.saveAll(cars);
     }
 
     @Test
