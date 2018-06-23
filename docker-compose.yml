@@ -1,0 +1,19 @@
+version: "2"
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=passpasspasspasspass
+      - MYSQL_DATABASE=fleetmanager
+  fleetmanager:
+    build: .
+    restart: always
+    ports:
+      - "0.0.0.0:8180:8080"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=jdbc:mysql://db:3306/fleetmanager?useSSL=false&allowPublicKeyRetrieval=true
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=passpasspasspasspass
