@@ -13,7 +13,7 @@ import java.util.List;
  * Car controller
  *
  * @author Ville Nupponen
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @RequestMapping("/car")
 @RestController

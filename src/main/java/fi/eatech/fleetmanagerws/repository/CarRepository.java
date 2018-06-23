@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Car repository
  *
  * @author Ville Nupponen
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @Repository
 public interface CarRepository extends JpaRepository<Car, String> {

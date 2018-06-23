@@ -16,7 +16,7 @@ import java.util.Optional;
  * Car service
  *
  * @author Ville Nupponen
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @Service
 public class CarService {

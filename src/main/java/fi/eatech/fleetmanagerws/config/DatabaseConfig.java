@@ -19,7 +19,7 @@ import java.util.Properties;
  * DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD had to be found in environment variables!
  *
  * @author Ville Nupponen
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @Profile("production")
 @Configuration
