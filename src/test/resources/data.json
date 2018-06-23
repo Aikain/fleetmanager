@@ -1,0 +1,41 @@
+[{
+  "brand": "Subaru",
+  "model": "Forester",
+  "registrationNumber": "ABC-123",
+  "modelYear": "2015",
+  "inspectionDate": "2018-05-01",
+  "engineSize": "2.0",
+  "enginePower": "108"
+},{
+  "brand": "Subaru",
+  "model": "Outback",
+  "registrationNumber": "EFG-456",
+  "modelYear": "2016",
+  "inspectionDate": "2018-05-02",
+  "engineSize": "2.5",
+  "enginePower": "129"
+},{
+  "brand": "Subaru",
+  "model": "Impreza",
+  "registrationNumber": "HIJ-789",
+  "modelYear": "2018",
+  "inspectionDate": "2018-02-01",
+  "engineSize": "2.0",
+  "enginePower": "84"
+},{
+  "brand": "Toyota",
+  "model": "Old",
+  "registrationNumber": "KLM-321",
+  "modelYear": "1970",
+  "inspectionDate": "2016-11-18",
+  "engineSize": "2.2",
+  "enginePower": "60"
+},{
+  "brand": "Volvo",
+  "model": "Old",
+  "registrationNumber": "NOP-654",
+  "modelYear": "1940",
+  "inspectionDate": "2018-05-03",
+  "engineSize": "2.3",
+  "enginePower": "30"
+}]
