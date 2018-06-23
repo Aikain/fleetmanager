@@ -40,14 +40,17 @@ public class CarService {
     }
 
     public Car addCar(Car car) {
-        if (carRepository.getOne(car.getRegistrationNumber()) != null)
-            throw new BadRequestException("Can't add new car when registrationNumber is already used.");
+        try {
+            Car tmp = carRepository.getOne(car.getRegistrationNumber());
+            if (tmp != null && tmp.getRegistrationNumber().equals(car.getRegistrationNumber()))
+                throw new BadRequestException("Can't add new car when registrationNumber is already used.");
+        } catch (Exception ignored) {};
         return carRepository.save(car);
     }
 
     public Car getCar(String id) {
         Car car = carRepository.getOne(id);
-        if (car == null) throw new NotFoundException("Car not found with given registrationnumber!");
+        if (car == null) throw new NotFoundException("Car not found with given registrationNumber!");
         return car;
     }
 
