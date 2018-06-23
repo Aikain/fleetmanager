@@ -9,7 +9,7 @@ import java.util.Date;
  * Tools class for static tool methods
  *
  * @author Ville Nupponen
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 public class Tools {
 

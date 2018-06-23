@@ -12,7 +12,7 @@ import java.util.Objects;
  * Car entity
  *
  * @author Ville Nupponen
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

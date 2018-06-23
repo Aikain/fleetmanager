@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * RuntimeException which return 404 httpstatus when throw it
  *
  * @author Ville Nupponen
- * @since 0.0.1-SNAPSHOT
+ * @since 1.0.0
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException {
