@@ -1,5 +1,7 @@
 package fi.eatech.fleetmanagerws.model.tools;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -28,4 +30,11 @@ public class Tools {
         return new SimpleDateFormat(format).format(date);
     }
 
+    public static CarFilter convertJsonToCarFilter(String json) {
+        CarFilter carFilter = null;
+        try {
+            carFilter = new ObjectMapper().readValue(json, CarFilter.class);
+        } catch (Exception ignored) {}
+        return carFilter;
+    }
 }

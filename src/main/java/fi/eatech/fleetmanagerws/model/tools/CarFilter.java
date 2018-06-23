@@ -12,6 +12,8 @@ public class CarFilter {
     private String model;
     private String brand;
 
+    public CarFilter() {}
+
     public CarFilter(Integer modelYearMin, Integer modelYearMax, String model, String brand) {
         this.modelYearMin = modelYearMin;
         this.modelYearMax = modelYearMax;
