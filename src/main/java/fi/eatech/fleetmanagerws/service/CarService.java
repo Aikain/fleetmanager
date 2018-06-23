@@ -40,11 +40,8 @@ public class CarService {
     }
 
     public Car addCar(Car car) {
-        try {
-            Car tmp = carRepository.getOne(car.getRegistrationNumber());
-            if (tmp != null && tmp.getRegistrationNumber().equals(car.getRegistrationNumber()))
-                throw new BadRequestException("Can't add new car when registrationNumber is already used.");
-        } catch (Exception ignored) {};
+        if (carRepository.exists(car.getRegistrationNumber()))
+            throw new BadRequestException("Can't add new car when registrationNumber is already used.");
         return carRepository.save(car);
     }
 
