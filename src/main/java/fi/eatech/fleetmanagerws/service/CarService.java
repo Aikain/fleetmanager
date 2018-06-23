@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Car service
@@ -40,15 +41,15 @@ public class CarService {
     }
 
     public Car addCar(Car car) {
-        if (carRepository.exists(car.getRegistrationNumber()))
+        if (carRepository.existsById(car.getRegistrationNumber()))
             throw new BadRequestException("Can't add new car when registrationNumber is already used.");
         return carRepository.save(car);
     }
 
     public Car getCar(String id) {
-        Car car = carRepository.getOne(id);
-        if (car == null) throw new NotFoundException("Car not found with given registrationNumber!");
-        return car;
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (optionalCar.isPresent()) return optionalCar.get();
+        throw new NotFoundException("Car not found with given registrationNumber!");
     }
 
     public Car updateCar(String id, Car car) {
@@ -59,7 +60,7 @@ public class CarService {
 
     public Car deleteCar(String id) {
         Car car = getCar(id);
-        carRepository.delete(id);
+        carRepository.deleteById(id);
         return car;
     }
 }
