@@ -6,10 +6,10 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * .
+ * Car entity
  *
  * @author Ville Nupponen
- * @since .
+ * @since 0.0.1-SNAPSHOT
  */
 @Entity
 public class Car {
