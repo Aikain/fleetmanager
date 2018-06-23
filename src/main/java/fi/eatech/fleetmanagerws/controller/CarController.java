@@ -1,6 +1,8 @@
 package fi.eatech.fleetmanagerws.controller;
 
 import fi.eatech.fleetmanagerws.model.Car;
+import fi.eatech.fleetmanagerws.model.tools.CarFilter;
+import fi.eatech.fleetmanagerws.model.tools.Tools;
 import fi.eatech.fleetmanagerws.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +27,8 @@ public class CarController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Car> list() {
-        return carService.getCars();
+    public List<Car> list(CarFilter carFilter, @RequestParam(required = false, defaultValue = "") String filters) {
+        return carService.getCars(filters.isEmpty() ? carFilter : Tools.convertJsonToCarFilter(filters));
     }
 
     @RequestMapping(method = RequestMethod.POST)
