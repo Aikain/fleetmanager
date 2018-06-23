@@ -7,5 +7,5 @@ ADD src /code/src
 
 RUN mvn test
 
-EXPOSE 80
+EXPOSE 8080
 CMD ["mvn", "spring-boot:run"]
