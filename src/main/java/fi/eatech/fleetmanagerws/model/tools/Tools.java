@@ -1,5 +1,8 @@
 package fi.eatech.fleetmanagerws.model.tools;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Tools class for static tool methods
  *
@@ -19,6 +22,10 @@ public class Tools {
             return getEnv(name);
         } catch (RuntimeException ignored) {}
         return defaultReturn;
+    }
+
+    public static String formatDate(Date date, String format) {
+        return new SimpleDateFormat(format).format(date);
     }
 
 }
