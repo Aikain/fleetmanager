@@ -1,7 +1,10 @@
 package fi.eatech.fleetmanagerws.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import fi.eatech.fleetmanagerws.model.tools.Tools;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,19 +15,25 @@ import java.util.Objects;
  * @since 0.0.1-SNAPSHOT
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Car {
     @Id
+    @Column(length = 16)
     private String registrationNumber;
+    @Column(length = 32)
     private String brand;
+    @Column(length = 32)
     private String model;
-    private short modelYear;
+    private Short modelYear;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date inspectionDate;
-    private double engineSize;                  // l^3
-    private double enginePower;                 // kW
+    private Double engineSize;                  // l^3
+    private Double enginePower;                 // kW
 
     public Car() {}
 
-    public Car(String registrationNumber, String brand, String model, short modelYear, Date inspectionDate, double engineSize, double enginePower) {
+    public Car(String registrationNumber, String brand, String model, Short modelYear, Date inspectionDate, Double engineSize, Double enginePower) {
         this.registrationNumber = registrationNumber;
         this.brand = brand;
         this.model = model;
@@ -43,16 +52,16 @@ public class Car {
     public String getModel() {
         return model;
     }
-    public short getModelYear() {
+    public Short getModelYear() {
         return modelYear;
     }
     public Date getInspectionDate() {
         return inspectionDate;
     }
-    public double getEngineSize() {
+    public Double getEngineSize() {
         return engineSize;
     }
-    public double getEnginePower() {
+    public Double getEnginePower() {
         return enginePower;
     }
 
@@ -65,16 +74,16 @@ public class Car {
     public void setModel(String model) {
         this.model = model;
     }
-    public void setModelYear(short modelYear) {
+    public void setModelYear(Short modelYear) {
         this.modelYear = modelYear;
     }
     public void setInspectionDate(Date inspectionDate) {
         this.inspectionDate = inspectionDate;
     }
-    public void setEngineSize(double engineSize) {
+    public void setEngineSize(Double engineSize) {
         this.engineSize = engineSize;
     }
-    public void setEnginePower(double enginePower) {
+    public void setEnginePower(Double enginePower) {
         this.enginePower = enginePower;
     }
 
@@ -98,7 +107,7 @@ public class Car {
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", modelYear=" + modelYear +
-                ", inspectionDate=" + inspectionDate +
+                ", inspectionDate=" + Tools.formatDate(inspectionDate, "yyyy-MM-dd") +
                 ", engineSize=" + engineSize +
                 ", enginePower=" + enginePower +
                 '}';
