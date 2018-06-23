@@ -1,10 +1,10 @@
 package fi.eatech.fleetmanagerws.model.tools;
 
 /**
- * .
+ * Helper class for car filtering
  *
  * @author Ville Nupponen
- * @since .
+ * @since 0.0.1-SNAPSHOT
  */
 public class CarFilter {
     private Integer modelYearMin;
