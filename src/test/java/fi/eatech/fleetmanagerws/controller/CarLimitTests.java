@@ -137,7 +137,7 @@ public class CarLimitTests {
                 .andReturn();
 
         List<Car> cars = TestUtils.convertJsonStringToObject(result.getResponse().getContentAsString(), new TypeReference<List<Car>>(){});
-        Assert.assertTrue(
+        Assert.assertFalse(
                 String.format("Rajoite '%s' palautti väärän tuloksen", carFilter),
                 cars.stream().anyMatch(i -> !i.getBrand().toLowerCase().equals(brand.toLowerCase())));
     }
@@ -156,7 +156,7 @@ public class CarLimitTests {
                 .andReturn();
 
         List<Car> cars = TestUtils.convertJsonStringToObject(result.getResponse().getContentAsString(), new TypeReference<List<Car>>(){});
-        Assert.assertTrue(
+        Assert.assertFalse(
                 String.format("Rajoite '%s' palautti väärän tuloksen", carFilter),
                 cars.stream().anyMatch(i -> !i.getModel().toLowerCase().equals(model.toLowerCase())));
     }
